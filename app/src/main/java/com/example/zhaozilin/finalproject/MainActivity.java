@@ -49,7 +49,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         buttonReset.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                resetBoard();
+                resetGame();
             }
         });
     }
@@ -151,6 +151,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         roundCount = 0;
         player1Turn = true;
     }
+    private void resetGame() {
+        player1Point = 0;
+        player2Point = 0;
+        updatePointText();
+        resetBoard();
+    }
+
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
