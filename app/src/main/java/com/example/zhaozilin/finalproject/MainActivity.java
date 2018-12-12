@@ -39,8 +39,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {
                 String buttonID = "botton_" + i + j;
-                int restID = getResources().getIdentifier(buttonID,"id", getPackageName());
-                buttons[i][j] = findViewById(restID);
+                int resID = getResources().getIdentifier(buttonID,"id", getPackageName());
+                buttons[i][j] = findViewById(resID);
                 buttons[i][j].setOnClickListener(this);
             }
         }
@@ -49,7 +49,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         buttonReset.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                resetBoard();
             }
         });
     }
@@ -150,5 +150,24 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         roundCount = 0;
         player1Turn = true;
+    }
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+
+        outState.putInt("roundCount", roundCount);
+        outState.putInt("player1Points", player1Point);
+        outState.putInt("player2Points", player2Point);
+        outState.putBoolean("player1Turn", player1Turn);
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+
+        roundCount = savedInstanceState.getInt("roundCount");
+        player1Point = savedInstanceState.getInt("player1Points");
+        player2Point = savedInstanceState.getInt("player2Points");
+        player1Turn = savedInstanceState.getBoolean("player1Turn");
     }
 }
